@@ -1,32 +1,44 @@
-import React, {useState} from 'react';
-import {Input, Button, Icon, Text, Layout} from '@ui-kitten/components';
+import React from 'react';
+import {Button, Text, Layout} from '@ui-kitten/components';
 import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {AuthService} from '../../services/auth.service';
 import {WithoutLoginRoutes as routes} from '../../config/routes';
 import {showMessage} from 'react-native-flash-message';
+import {useForm} from 'react-hook-form';
+import {TextInput} from '../core/TextInput';
+import {PasswordField} from '../core/PasswordField';
+
 const authService = new AuthService();
+
+const LoginFormComponent = ({onSubmit}) => {
+  const {control, handleSubmit} = useForm();
+
+  return (
+    <View style={{
+      width: '90%'
+    }}>
+      <View>
+        <TextInput
+          control={control}
+          name="mobileNumber"
+          placeholder="Mobile Number"
+          keyboardType="number-pad"
+        />
+      </View>
+      <View>
+        <PasswordField control={control}/>
+      </View>
+      <Button onPress={handleSubmit(onSubmit)}> Login </Button>
+    </View>
+  )
+}
 
 export const LoginForm = () => {
   const navigation = useNavigation();
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
-  const onIconPress = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const renderIcon = (style) => (
-    <Icon {...style} name={secureTextEntry ? 'eye-off' : 'eye'} />
-  );
-
-  const onLogin = async () => {
-    await authService.login({
-      mobileNumber,
-      password
-    });
-
+  const onLogin = async (values) => {
+    await authService.login(values);
     navigation.navigate('DrawerNavigator');
     showMessage({
       message: "Login Successfull",
@@ -39,24 +51,7 @@ export const LoginForm = () => {
 
   return (
     <>
-      <View style={{
-        width: '90%'
-      }}>
-        <Input
-          placeholder='Mobile Number'
-          value={mobileNumber}
-          onChangeText={setMobileNumber}
-        />
-        <Input
-          value={password}
-          placeholder='********'
-          icon={renderIcon}
-          secureTextEntry={secureTextEntry}
-          onIconPress={onIconPress}
-          onChangeText={setPassword}
-        />
-        <Button onPress={onLogin} >Login </Button>
-      </View>
+      <LoginFormComponent onSubmit={onLogin}/>
       <View>
       </View>
       <Layout style={styles.container}>

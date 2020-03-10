@@ -1,42 +1,33 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
-import {Input, Button, Divider, Icon} from '@ui-kitten/components';
+import {Button, Divider} from '@ui-kitten/components';
 import {AuthService} from '../../services/auth.service';
 import {useNavigation} from '@react-navigation/core';
 import {showMessage} from 'react-native-flash-message';
+import {useForm} from 'react-hook-form';
+import {TextInput} from '../core/TextInput';
+import {PasswordField} from '../core/PasswordField';
 const authService = new AuthService();
 
+const SignupFormComponent = ({onSubmit}) => {
+  const {control, handleSubmit} = useForm();
+  return (
+    <View>
+      <TextInput name="gym.name" placeholder="Gym Name" control={control} />
+      <Divider />
+      <TextInput name="owner.mobileNumber" placeholder="Mobile Number" control={control} />
+      <TextInput name="owner.firstName" placeholder="First Name" control={control} />
+      <TextInput name="owner.lastName" placeholder="Last Name" control={control} />
+      <PasswordField name="owner.password" control={control} />
+      <Button onPress={handleSubmit(onSubmit)} >Signup </Button>
+    </View>
+  )
+}
+
 export const Signupform = ({}) => {
-
-  const [gymName, setGymName] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
   const navigation = useNavigation();
-
-  const renderIcon = (style) => (
-    <Icon {...style} name={secureTextEntry ? 'eye-off' : 'eye'} />
-  );
-
-  const onIconPress = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const onSignup = async () => {
-    await authService.signup({
-      gym: {
-        name: gymName
-      },
-      owner: {
-        mobileNumber,
-        password,
-        firstName,
-        lastName,
-      }
-    });
-
+  const onSignup = async (values) => {
+    await authService.signup(values);
     navigation.navigate('DrawerNavigator');
     showMessage({
       message: "Signup Successfull",
@@ -45,38 +36,7 @@ export const Signupform = ({}) => {
   }
   return (
     <>
-      <View>
-        <Input
-          placeholder='Gym Name'
-          value={gymName}
-          onChangeText={setGymName}
-        />
-        <Divider />
-        <Input
-          placeholder='Mobile Number'
-          value={mobileNumber}
-          onChangeText={setMobileNumber}
-        />
-        <Input
-          placeholder='First Name'
-          value={firstName}
-          onChangeText={setFirstName}
-        />
-        <Input
-          placeholder='Last Name'
-          value={lastName}
-          onChangeText={setLastName}
-        />
-        <Input
-          value={password}
-          placeholder='********'
-          icon={renderIcon}
-          secureTextEntry={secureTextEntry}
-          onIconPress={onIconPress}
-          onChangeText={setPassword}
-        />
-        <Button onPress={onSignup} >Signup </Button>
-      </View>
+      <SignupFormComponent onSubmit={onSignup}/>
       <View>
       </View>
     </>

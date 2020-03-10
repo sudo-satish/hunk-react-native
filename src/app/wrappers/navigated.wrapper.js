@@ -7,7 +7,7 @@ const BackIcon = (style) => (
   <Icon {...style} name='arrow-back' />
 );
 
-export const NavigatedWrapper = ({children}) => {
+export const NavigatedWrapper = ({children, title="Hunk"}) => {
   const navigation = useNavigation();
 
   const navigateBack = () => {
@@ -20,7 +20,7 @@ export const NavigatedWrapper = ({children}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <TopNavigation title='Hunk' alignment='center' leftControl={BackAction()} />
+      <TopNavigation title={title} alignment='center' leftControl={BackAction()} />
       <Divider />
       {children}
     </SafeAreaView>

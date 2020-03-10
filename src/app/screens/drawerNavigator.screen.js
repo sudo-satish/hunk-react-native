@@ -7,12 +7,13 @@ const Drawer = createDrawerNavigator();
 
 const DrawerContent = ({navigation, state}) => {
   const ownerRouteKeys = Reflect.ownKeys(OwnersRoutes);
+  const visibleRouteKeys = ownerRouteKeys.filter((key) => OwnersRoutes[key].isDrawerMenu);
   const onSelect = (index) => {
     navigation.navigate(state.routeNames[index]);
   };
   return (
     <UIKittenDrawer
-      data={ownerRouteKeys.map(ownerRouteKey => ({title: OwnersRoutes[ownerRouteKey].drawerTitle}))}
+      data={visibleRouteKeys.map(ownerRouteKey => ({title: OwnersRoutes[ownerRouteKey].drawerTitle}))}
       selectedIndex={state.index}
       onSelect={onSelect}
     />

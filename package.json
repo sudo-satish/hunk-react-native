@@ -17,6 +17,8 @@
     "@react-navigation/stack": "^5.1.0",
     "@ui-kitten/components": "^4.4.1",
     "@ui-kitten/eva-icons": "^4.4.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "react": "16.9.0",
     "react-hook-form": "^4.9.8",
     "react-native": "0.61.5",
@@ -27,6 +29,10 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.2.0",
     "react-native-svg": "^11.0.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "reselect": "^4.0.0",
     "yup": "^0.28.1"
   },
   "devDependencies": {
@@ -37,7 +43,8 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.9.0"
+    "react-test-renderer": "16.9.0",
+    "redux-devtools": "^3.5.0"
   },
   "jest": {
     "preset": "react-native"

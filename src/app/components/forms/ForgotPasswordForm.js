@@ -18,6 +18,7 @@ export const ForgotPasswordForm = () => {
       <Input
         placeholder='Mobile Number'
         value={mobileNumber}
+        keyboardType="number-pad"
         onChangeText={setMobileNumber}
       />
       <Button onPress={onForgotPassword} >Send OTP </Button>

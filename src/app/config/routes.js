@@ -7,6 +7,8 @@ import {DrawerNavigator} from "../screens/drawerNavigator.screen";
 import {OwnerDashboardScreen} from "../screens/ownerDashboard.screen";
 import {LogoutScreen} from "../screens/logout.screen";
 import {FeedbackScreen} from "../screens/feedback.screen";
+import {UpdateMemberScreen} from "../screens/updateMember.screen";
+import {AddMemberScreen} from "../screens/addMember.screen";
 
 export const WithoutLoginRoutes = {
   // Home: {name: 'Home', component: HomeScreen, options: {}},
@@ -18,7 +20,9 @@ export const WithoutLoginRoutes = {
 }
 
 export const OwnersRoutes = {
-  OwnerDashboard: {name: 'OwnerDashboard', drawerTitle:"Dashboard", component: OwnerDashboardScreen, options: {}},
-  Feedback: {name: 'Feedback', drawerTitle: "Feedback", component: FeedbackScreen, options: {}},
-  Logout: {name: 'Logout', drawerTitle: "Logout", component: LogoutScreen, options: {}},
+  OwnerDashboard: {name: 'OwnerDashboard', isDrawerMenu:true, drawerTitle:"Dashboard", component: OwnerDashboardScreen, options: {}},
+  Feedback: {name: 'Feedback', isDrawerMenu:true, drawerTitle: "Feedback", component: FeedbackScreen, options: {}},
+  EditMember: {name: 'EditMember', isDrawerMenu: false, component: UpdateMemberScreen, options: {}},
+  AddMember: {name: 'AddMember', isDrawerMenu: false, component: AddMemberScreen, options: {}},
+  Logout: {name: 'Logout', isDrawerMenu:true, drawerTitle: "Logout", component: LogoutScreen, options: {}},
 }

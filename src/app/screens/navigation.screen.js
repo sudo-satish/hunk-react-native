@@ -16,8 +16,9 @@ const HomeNavigator = () => (
   </Stack.Navigator>
 );
 
-export const AppNavigator = () => (
+export const AppNavigator = ({store}) => {
+  return (
   <NavigationContainer>
     <HomeNavigator />
   </NavigationContainer>
-);
+)};

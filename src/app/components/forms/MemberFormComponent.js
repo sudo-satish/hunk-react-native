@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Divider} from '@ui-kitten/components';
 import {useForm} from 'react-hook-form';
 import {View} from 'react-native';
@@ -12,6 +12,14 @@ export const MemberFormComponent = ({defaultValues = undefined, onSubmit}) => {
   const {control, handleSubmit, setValue} = useForm({
     defaultValues
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      Reflect.ownKeys(defaultValues).forEach(key => {
+        setValue(key, defaultValues[key]);
+      });
+    }
+  }, [defaultValues]);
 
   return (
     <View style={{flex: 1}}>

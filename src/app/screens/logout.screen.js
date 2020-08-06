@@ -7,7 +7,7 @@ const authService = new AuthService();
 export const LogoutScreen = ({navigation}) => {
   useEffect(() => {
     async function logout() {
-      await authService.logout();
+      // await authService.logout();
       navigation.navigate('Home');
     }
     logout();

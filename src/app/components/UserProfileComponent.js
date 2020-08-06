@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import {
   StyleSheet,
   Text,
@@ -6,32 +7,44 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import {selectedMemberSelector} from '../redux/selectors';
+import {useNavigation} from '@react-navigation/core';
+import {OwnersRoutes} from '../config/routes';
 
-export default class Profile extends Component {
+const mapStateToProps = (state) => ({
+  selectedMember: selectedMemberSelector(state)
+});
 
-  render() {
-    return (
-      <View style={styles.container}>
-          <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
-          <View style={styles.body}>
-            <View style={styles.bodyContent}>
-              <Text style={styles.name}>John Doe</Text>
-              <Text style={styles.info}>UX Designer / Mobile developer</Text>
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
-              
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Opcion 1</Text>  
-              </TouchableOpacity>              
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Opcion 2</Text> 
-              </TouchableOpacity>
-            </View>
-        </View>
+export default UserProfile = connect(mapStateToProps)(({selectedMember:user}) => {
+  const navigation = useNavigation();
+  const onUpdateDetails = () => navigation.navigate(OwnersRoutes.EditMember.name);
+
+  return (
+    <View style={styles.container}>
+        <View style={styles.header}></View>
+        <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+        <View style={styles.body}>
+          <View style={styles.bodyContent}>
+            <Text style={styles.name}>{user.firstName}</Text>
+            <Text style={styles.info}>{user.mobileNumber}</Text>
+            <Text style={styles.description}>
+              Height: 5'6 | Weight: 55
+            </Text>
+            <Text style={styles.description}>
+              Age: 25 yrs
+            </Text>
+            
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Train Now</Text>  
+            </TouchableOpacity>              
+            <TouchableOpacity style={styles.buttonContainer} onPress={onUpdateDetails}>
+              <Text>Update Details</Text> 
+            </TouchableOpacity>
+          </View>
       </View>
-    );
-  }
-}
+    </View>
+  );
+});
 
 const styles = StyleSheet.create({
   header:{
@@ -47,7 +60,8 @@ const styles = StyleSheet.create({
     marginBottom:10,
     alignSelf:'center',
     position: 'absolute',
-    marginTop:130
+    marginTop:130,
+    backgroundColor: "#00BFFF",
   },
   name:{
     fontSize:22,

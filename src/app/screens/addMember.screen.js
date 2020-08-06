@@ -1,11 +1,11 @@
 import React from 'react';
 import {NavigatedWrapper} from '../wrappers/navigated.wrapper';
-import {AddMember} from '../components/AddMember.component';
+import {AddMemberComponent} from '../components/AddMemberComponent';
 
 export const AddMemberScreen = () => {
   return (
     <NavigatedWrapper title="Add new member">
-      <AddMember />
+      <AddMemberComponent />
     </NavigatedWrapper>
   )
 };

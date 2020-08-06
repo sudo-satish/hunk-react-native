@@ -1,11 +1,13 @@
 import React from 'react';
 import {NavigatedWrapper} from '../wrappers/navigated.wrapper';
-import {UpdatetMemberComponent} from '../components/UpdateMember.component';
+import {UpdateMemberComponent} from '../components/UpdateMemberComponent';
 
 export const UpdateMemberScreen = () => {
+  console.log('Update Member Screen');
+  
   return (
     <NavigatedWrapper title="Update Member">
-      <UpdatetMemberComponent/>
+      <UpdateMemberComponent/>
     </NavigatedWrapper> 
   )
 };

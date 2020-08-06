@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import {View} from 'react-native';
-import {List, ListItem, Icon, Button, Input, TopNavigation, TopNavigationAction} from '@ui-kitten/components';
+import {List, ListItem, Button, Input, TopNavigation, TopNavigationAction, Text} from '@ui-kitten/components';
 import {FloatingAction} from "react-native-floating-action";
+import moment from 'moment';
 import {membersAsListSelector} from '../redux/selectors';
 import {updateMember} from '../redux/members';
 import {useNavigation} from '@react-navigation/core';
@@ -20,9 +21,24 @@ const actions = [
   },
 ];
 
+const PaymentStatus = ({paymentDetails}) => {
+  return (
+    <Text>{paymentDetails.status === 'PENDING' && `Payment due on: ${moment(paymentDetails.duedate).format('DD MMM')}`}</Text>
+  )
+};
+
 const traineeListItemRenderer = ({item, toggleAttendance, onEditMember}) => {
   const renderItemAccessory = (style, item) => 
-    <Button style={style} appearance='ghost' onPress={() => toggleAttendance(item)} status={item.isPresent ? 'success' : 'danger'} icon={(style) => <Icon {...style} name={item.isPresent ? 'checkmark-circle-outline' : 'checkmark-circle-2-outline'} />} />
+    <>
+      {item.payment && <PaymentStatus paymentDetails={item.payment} />}
+      <Button
+        style={style}
+        appearance='ghost'
+        onPress={() => toggleAttendance(item)}
+        status={item.isPresent ? 'success' : 'danger'}
+        icon={getIcon(item.isPresent ? 'checkmark-circle-outline' : 'checkmark-circle-2-outline')} />
+    
+    </>
 
   return (
     <ListItem
@@ -50,7 +66,7 @@ const TraineeList = ({traineeList}) => {
 
   const onEditMember = (member) => {
     memberService.setSelectedMember(member);
-    navigation.navigate(OwnersRoutes.EditMember.name);
+    navigation.navigate(OwnersRoutes.UserProfile.name);
   }
   return (
     <List

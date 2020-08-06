@@ -1,5 +1,5 @@
 import React from 'react';
-import OwnerDashboardComponent from '../components/OwnerDashboard.component';
+import OwnerDashboardComponent from '../components/OwnerDashboardComponent';
 
 export const OwnerDashboardScreen = () => {
   return (

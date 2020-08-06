@@ -9,6 +9,7 @@ import {LogoutScreen} from "../screens/logout.screen";
 import {FeedbackScreen} from "../screens/feedback.screen";
 import {UpdateMemberScreen} from "../screens/updateMember.screen";
 import {AddMemberScreen} from "../screens/addMember.screen";
+import {UserProfileScreen} from "../screens/userProfile.screen";
 
 export const WithoutLoginRoutes = {
   // Home: {name: 'Home', component: HomeScreen, options: {}},
@@ -23,6 +24,7 @@ export const OwnersRoutes = {
   OwnerDashboard: {name: 'OwnerDashboard', isDrawerMenu:true, drawerTitle:"Dashboard", component: OwnerDashboardScreen, options: {}},
   Feedback: {name: 'Feedback', isDrawerMenu:true, drawerTitle: "Feedback", component: FeedbackScreen, options: {}},
   EditMember: {name: 'EditMember', isDrawerMenu: false, component: UpdateMemberScreen, options: {}},
+  UserProfile: {name: 'UserProfile', isDrawerMenu: false, component: UserProfileScreen, options: {}},
   AddMember: {name: 'AddMember', isDrawerMenu: false, component: AddMemberScreen, options: {}},
   Logout: {name: 'Logout', isDrawerMenu:true, drawerTitle: "Logout", component: LogoutScreen, options: {}},
 }
